@@ -22,4 +22,4 @@ sequelize
     console.error("No se puede conectar a la base de datos:", err);
   });
 
-export default sequelize;
+export { sequelize };

@@ -1,22 +1,29 @@
 import express from "express";
+import cors from "cors";
+import { routerEstudiantes } from "../routes/estudiantes.routes.js";
 
-const app = express();
+export default class Server {
+  constructor() {
+    this.app = express();
+    this.port = process.env.PORT;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+    this.middlewares();
+    this.routes();
+  }
 
-//Midlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+  middlewares() {
+    this.app.use(cors());
+    this.app.use(express.static("public"));
+    this.app.use(express.json());
+  }
 
-routes();
-app.listen(3000, () => console.log("Server running on port 3000"));
-{
-  this.app.use("/", (req, res) => {
-    res.send("Hello World!");
-  });
+  routes() {
+    this.app.use("/estudiantes", routerEstudiantes);
+  }
+
+  listen() {
+    this.app.listen(this.port, () => {
+      console.log(`Corriendo en el puerto: ${this.port}`);
+    });
+  }
 }
-
-app.listen(3000, () => console.log("Server running on port 3000"));
-//

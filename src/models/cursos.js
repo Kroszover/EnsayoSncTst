@@ -23,4 +23,4 @@ const Curso = sequelize.define(
   }
 );
 
-export default Curso;
+export { Curso };
